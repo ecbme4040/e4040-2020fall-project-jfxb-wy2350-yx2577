@@ -17,3 +17,33 @@ INSTRUCTIONS for naming the students' solution repository for assignments with m
 
 # Organization of this directory
 To be populated by students, as shown in previous assignments
+
+
+# Project Details
+
+## Files
+We only have one Jupiter notebook named 'RAN_model_submission.ipynb'. We used CIFAR10 dataset, which could be loaded using API. Thus, you could directly run the notebook from the start to the end.
+
+## Functions
+There are totally 5 functions
+
+> conv_unit
+> - Parameters: x, filters, kernel_size, weight_decay, strides
+> - It is a function containing  one Conv2D layer and BatchNormalization layer, using for residual unit.
+
+> residual_unit
+> - Parameters: x, filters, kernel_size, weight_decay
+> - It consists of two branches. We designed this block according to the ResNet, but different with the original paper, we only used one combination [CONV, BN, RELU] instead of three.
+
+> attention_module
+> - It consists of two branches: Trunk Branch and Soft Mask Branch. Trunk Branch is quite simple. It contains only 2 residual units. While the Soft Mask Branch is much more complex. It includes process of down-sampling and up-sampling, in our implementation, they are coded as ‘MaxPooling2D’ and ‘UpSampling2D’. We set the parameters same as the paper, that is, {𝑝 = 1,𝑡 = 2, 𝑟 = 1}.
+
+The whole Residual Attention model consists of Conv, MaxPooling, Dense layers, 6 Residual Units (UR) and 3 Attention Modules (AM). The ordinary layers are stacked similar with other classic neural network models, while URs and AMs blocks are stacked alternatively.
+
+> lr_scheduler
+> - Parameters: epoch
+> - It controls the learning rate according to the current epoch.
+
+> plot_history
+> - Parameters: history
+> - It used for plotting the training and validation loss and accuracy.
